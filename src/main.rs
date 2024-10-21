@@ -1,16 +1,26 @@
+use clap::Parser;
 use chrono::Local;
-use chrono_tz::{
-    Europe::London,
-    America::{Los_Angeles, New_York},
-};
+use std::str::FromStr;
+use chrono_tz::Tz;
+
+#[derive(Parser, Debug)]
+#[command(version, about, long_about = None)]
+struct Args {
+    #[clap(name="city")]
+    #[arg(short, long)]
+    city: Vec<String>,
+}
 
 fn main() {
+    let args = Args::parse();
     let now = Local::now();
 
-    println!("{0: <15} | {1: <10}", "City", "Time");
-    println!("{0: <15} | {1: <10}", "_______________", "____________________________________");
-    println!("{0: <15} | {1: <10}", "Local", now);
-    println!("{0: <15} | {1: <10}", "New York", now.with_timezone(&New_York));
-    println!("{0: <15} | {1: <10}", "Los Angeles", now.with_timezone(&Los_Angeles));
-    println!("{0: <15} | {1: <10}", "London", now.with_timezone(&London));
+    println!("{0: <20} | {1: <20}", "City", "Time");
+    println!("{0: <20} | {1: <20}", "____________________", "____________________________________");
+    println!("{0: <20} | {1: <20}", "Local", now);
+
+    for zone in args.city {
+        let timezone = Tz::from_str(&zone).unwrap();
+        println!("{0: <20} | {1: <10}", zone, now.with_timezone(&timezone));
+    }
 }

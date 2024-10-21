@@ -6,6 +6,6 @@ authors = ["João Mello"]
 description = "Shows time for selected timezones"
 
 [dependencies]
-clap = "4.5.20"
+clap = { version = "4.5.20", features = ["color", "help", "std", "suggestions", "usage", "derive"] }
 chrono = "0.4.38"
 chrono-tz = "0.10.0"
