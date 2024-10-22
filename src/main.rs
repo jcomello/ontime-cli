@@ -35,7 +35,7 @@ fn main() {
 
     match &cli.command {
         Some(Commands::List) => {
-            println!("listagem");
+            println!("Available Timezones");
             for timezone in TZ_VARIANTS {
                 println!("{}", timezone);
             }
