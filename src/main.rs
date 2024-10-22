@@ -9,6 +9,10 @@ struct Args {
     #[clap(name="city")]
     #[arg(short, long)]
     city: Vec<String>,
+
+    #[clap(name="local")]
+    #[arg(short, long, default_value_t = false)]
+    local: bool,
 }
 
 fn main() {
@@ -17,7 +21,10 @@ fn main() {
 
     println!("{0: <20} | {1: <20}", "City", "Time");
     println!("{0: <20} | {1: <20}", "____________________", "____________________________________");
-    println!("{0: <20} | {1: <20}", "Local", now);
+
+    if args.local {
+        println!("{0: <20} | {1: <20}", "Local", now);
+    }
 
     for zone in args.city {
         let timezone = Tz::from_str(&zone).unwrap();
