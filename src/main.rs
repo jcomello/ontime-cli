@@ -3,7 +3,7 @@ use chrono::Local;
 use std::str::FromStr;
 use chrono_tz::{TZ_VARIANTS, Tz};
 
-#[derive(Parser)]
+#[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Cli {
     /// Timezone to be compared
@@ -20,7 +20,7 @@ struct Cli {
     command: Option<Commands>,
 }
 
-#[derive(Subcommand)]
+#[derive(Subcommand, Debug)]
 enum Commands {
     /// List available timezones
     List
