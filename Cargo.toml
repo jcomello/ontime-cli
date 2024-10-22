@@ -3,7 +3,7 @@ name = "ontime"
 version = "0.1.0"
 edition = "2021"
 authors = ["João Mello"]
-description = "Shows time for selected timezones"
+description = "Compare given timezones"
 
 [dependencies]
 clap = { version = "4.5.20", features = ["color", "help", "std", "suggestions", "usage", "derive"] }

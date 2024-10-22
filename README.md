@@ -1,12 +1,14 @@
 # Ontime CLI
 
-This is a CLI to show the time of given Cities.
+This is a CLI to show the time of given Timezones.
+Compare different places timezones.
+
 
 ## Usage
 
 Just say the timezones you want to compare and you're ready to go.
 ```
-$ ontime --city America/New_York --city Europe/London --city Europe/Berlin
+$ ontime --timezone America/New_York --timezone Europe/London --timezone Europe/Berlin
 ```
 And it'll bring:
 ```
@@ -20,7 +22,7 @@ Europe/Berlin        | 2024-10-22 03:08:30.713163133 CEST
 You can set the `local` flag to show your local timezone.
 
 ```
-$ ontime --city America/New_York --city Europe/London --city Europe/Berlin --local
+$ ontime --timezone America/New_York --timezone Europe/London --timezone Europe/Berlin --local
 ```
 And it'll bring:
 ```
