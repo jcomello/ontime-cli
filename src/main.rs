@@ -6,10 +6,12 @@ use chrono_tz::Tz;
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
-    #[clap(name="city")]
+    /// Timezone to be compared
+    #[clap(name="timezone")]
     #[arg(short, long)]
-    city: Vec<String>,
+    timezone: Vec<String>,
 
+    /// Compare timezones with local time
     #[clap(name="local")]
     #[arg(short, long, default_value_t = false)]
     local: bool,
@@ -26,7 +28,7 @@ fn main() {
         println!("{0: <20} | {1: <20}", "Local", now);
     }
 
-    for zone in args.city {
+    for zone in args.timezone {
         let timezone = Tz::from_str(&zone).unwrap();
         println!("{0: <20} | {1: <10}", zone, now.with_timezone(&timezone));
     }
