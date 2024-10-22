@@ -33,3 +33,8 @@ America/New_York     | 2024-10-21 21:08:30.713163133 EDT
 Europe/London        | 2024-10-22 02:08:30.713163133 BST
 Europe/Berlin        | 2024-10-22 03:08:30.713163133 CEST
 ```
+
+If you want to know all available timezones, you can use the list command.
+```
+$ ontime list
+```

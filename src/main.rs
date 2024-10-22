@@ -1,7 +1,7 @@
 use clap::{Parser, Subcommand};
 use chrono::Local;
 use std::str::FromStr;
-use chrono_tz::Tz;
+use chrono_tz::{TZ_VARIANTS, Tz};
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
@@ -23,11 +23,7 @@ struct Cli {
 #[derive(Subcommand)]
 enum Commands {
     /// List available timezones
-    List {
-        /// list all available timezones
-        #[arg(short, long)]
-        all: bool,
-    },
+    List
 }
 
 
@@ -35,8 +31,21 @@ fn main() {
     let cli = Cli::parse();
     let now = Local::now();
 
+    println!("\n");
 
-    println!("{0: <20} | {1: <20}", "City", "Time");
+    match &cli.command {
+        Some(Commands::List) => {
+            println!("listagem");
+            for timezone in TZ_VARIANTS {
+                println!("{}", timezone);
+            }
+
+            return
+        },
+        None => {},
+    }
+
+    println!("{0: <20} | {1: <20}", "Timezone", "Time");
     println!("{0: <20} | {1: <20}", "____________________", "____________________________________");
 
     if cli.local {
