@@ -26,34 +26,39 @@ enum Commands {
     List
 }
 
+impl Cli {
+    fn list_available_timezones(&self) {
+        println!("Available Timezones");
+        for timezone in TZ_VARIANTS {
+            println!("{}", timezone);
+        }
+    }
+
+    fn list_timezones(&self) {
+        let now = Local::now();
+
+        println!("{0: <20} | {1: <20}", "Timezone", "Time");
+        println!("{0: <20} | {1: <20}", "____________________", "____________________________________");
+
+        if self.local {
+            println!("{0: <20} | {1: <20}", "Local", now);
+        }
+
+        for zone in &self.timezone {
+            let timezone = Tz::from_str(&zone).unwrap();
+            println!("{0: <20} | {1: <10}", zone, now.with_timezone(&timezone));
+        }
+    }
+}
+
 
 fn main() {
     let cli = Cli::parse();
-    let now = Local::now();
 
     println!("\n");
 
     match &cli.command {
-        Some(Commands::List) => {
-            println!("Available Timezones");
-            for timezone in TZ_VARIANTS {
-                println!("{}", timezone);
-            }
-
-            return
-        },
-        None => {},
-    }
-
-    println!("{0: <20} | {1: <20}", "Timezone", "Time");
-    println!("{0: <20} | {1: <20}", "____________________", "____________________________________");
-
-    if cli.local {
-        println!("{0: <20} | {1: <20}", "Local", now);
-    }
-
-    for zone in cli.timezone {
-        let timezone = Tz::from_str(&zone).unwrap();
-        println!("{0: <20} | {1: <10}", zone, now.with_timezone(&timezone));
+        Some(Commands::List) => cli.list_available_timezones(),
+        None => cli.list_timezones(),
     }
 }
