@@ -9,3 +9,4 @@ description = "Compare given timezones"
 clap = { version = "4.5.20", features = ["color", "help", "std", "suggestions", "usage", "derive"] }
 chrono = "0.4.38"
 chrono-tz = "0.10.0"
+iana-time-zone = "0.1.61"

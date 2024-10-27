@@ -273,6 +273,7 @@ dependencies = [
  "chrono",
  "chrono-tz",
  "clap",
+ "iana-time-zone",
 ]
 
 [[package]]

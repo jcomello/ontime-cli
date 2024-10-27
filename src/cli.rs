@@ -1,5 +1,6 @@
 use clap::{Parser, Subcommand};
-use chrono::Local;
+use iana_time_zone;
+use chrono::{Local, DateTime};
 use std::str::FromStr;
 use chrono_tz::{TZ_VARIANTS, Tz};
 
@@ -9,7 +10,7 @@ pub struct Cli {
     /// Timezone to be compared
     #[clap(name="timezone")]
     #[arg(short, long)]
-    pub timezone: Vec<String>,
+    pub timezones: Vec<String>,
 
     /// Compare timezones with local time
     #[clap(name="local")]
@@ -27,26 +28,32 @@ pub enum Commands {
 }
 
 impl Cli {
-    pub fn list_available_timezones(&self) {
-        println!("Available Timezones");
-        for timezone in TZ_VARIANTS {
-            println!("{}", timezone);
+    pub fn available_timezones(&self) -> [Tz; 596] {
+        TZ_VARIANTS
+    }
+
+    pub fn timezones(&self) -> Vec<(String, DateTime<Tz>)> {
+        let current_zone = iana_time_zone::get_timezone().unwrap();
+        let current_tz = Cli::get_tz(&current_zone);
+        let now = Local::now();
+        let mut zones: Vec<(String, DateTime<Tz>)> = self.timezones.clone().into_iter().map(|zone| {
+            let timezone = Cli::get_tz(&zone);
+
+            (zone, now.with_timezone(&timezone))
+        }).collect();
+
+        if self.local {
+            let mut new_zones: Vec<(String, DateTime<Tz>)> = vec![("Local".to_string(), now.with_timezone(&current_tz))];
+
+            new_zones.append(&mut zones);
+
+            return new_zones;
+        } else {
+            return zones;
         }
     }
 
-    pub fn list_timezones(&self) {
-        let now = Local::now();
-
-        println!("{0: <20} | {1: <20}", "Timezone", "Time");
-        println!("{0: <20} | {1: <20}", "____________________", "____________________________________");
-
-        if self.local {
-            println!("{0: <20} | {1: <20}", "Local", now);
-        }
-
-        for zone in &self.timezone {
-            let timezone = Tz::from_str(&zone).unwrap();
-            println!("{0: <20} | {1: <10}", zone, now.with_timezone(&timezone));
-        }
+    fn get_tz(timezone: &String) -> Tz {
+        Tz::from_str(&timezone).unwrap()
     }
 }
