@@ -9,7 +9,7 @@ use chrono_tz::{TZ_VARIANTS, Tz};
 pub struct Cli {
     /// Timezone to be compared
     #[clap(name="timezone")]
-    #[arg(short, long, required=true)]
+    #[arg(short, long)]
     pub timezones: Vec<String>,
 
     /// Compare timezones with local time
