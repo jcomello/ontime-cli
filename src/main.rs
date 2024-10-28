@@ -16,13 +16,14 @@ fn main() {
                 println!("{}", timezone);
             }
         },
-        None => {
+        Some(Commands::Compare { timezones, local }) => {
             println!("{0: <20} | {1: <20}", "Timezone", "Time");
             println!("{0: <20} | {1: <20}", "____________________", "____________________________________");
 
-            for zone in cli.timezones() {
+            for zone in cli.timezones(&timezones, *local) {
                 println!("{0: <20} | {1: <10}", zone.0, zone.1);
             }
         },
+        None => {},
     }
 }
