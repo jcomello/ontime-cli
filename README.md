@@ -8,7 +8,7 @@ Compare different places timezones.
 
 Just say the timezones you want to compare and you're ready to go.
 ```
-$ ontime --timezone America/New_York --timezone Europe/London --timezone Europe/Berlin
+$ ontime compare --timezone America/New_York --timezone Europe/London --timezone Europe/Berlin
 ```
 And it'll bring:
 ```
@@ -22,7 +22,7 @@ Europe/Berlin        | 2024-10-22 03:08:30.713163133 CEST
 You can set the `local` flag to show your local timezone.
 
 ```
-$ ontime --timezone America/New_York --timezone Europe/London --timezone Europe/Berlin --local
+$ ontime compare --timezone America/New_York --timezone Europe/London --timezone Europe/Berlin --local
 ```
 And it'll bring:
 ```
