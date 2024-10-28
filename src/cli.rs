@@ -35,15 +35,23 @@ impl Cli {
         TZ_VARIANTS
     }
 
-    pub fn timezones(&self, timezones: &Vec<String>, local: bool) -> Vec<(String, DateTime<Tz>)> {
+    pub fn timezones(
+        &self,
+        timezones: &Vec<String>,
+        local: bool) -> Vec<(String, DateTime<Tz>)> {
         let current_zone = iana_time_zone::get_timezone().unwrap();
         let current_tz = Cli::get_tz(&current_zone);
         let now = Local::now();
-        let mut zones: Vec<(String, DateTime<Tz>)> = timezones.clone().into_iter().map(|zone| {
-            let timezone = Cli::get_tz(&zone);
+        let mut zones: Vec<(String, DateTime<Tz>)> =
+            timezones
+            .clone()
+            .into_iter()
+            .map(|zone| {
+                let timezone = Cli::get_tz(&zone);
 
-            (zone, now.with_timezone(&timezone))
-        }).collect();
+                (zone, now.with_timezone(&timezone))
+            })
+            .collect();
 
         if local {
             let local_string = format!("{} (Local)", current_zone);
