@@ -46,7 +46,9 @@ impl Cli {
         }).collect();
 
         if local {
-            let mut new_zones: Vec<(String, DateTime<Tz>)> = vec![("Local".to_string(), now.with_timezone(&current_tz))];
+            let local_string = format!("{} (Local)", current_zone);
+            let element = (local_string, now.with_timezone(&current_tz));
+            let mut new_zones: Vec<(String, DateTime<Tz>)> = vec![element];
 
             new_zones.append(&mut zones);
 
