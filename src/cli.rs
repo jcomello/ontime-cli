@@ -1,6 +1,6 @@
 use clap::{Parser, Subcommand};
 use iana_time_zone;
-use chrono::{Local, DateTime};
+use chrono::{Utc, DateTime};
 use std::str::FromStr;
 use chrono_tz::{TZ_VARIANTS, Tz};
 
@@ -31,17 +31,17 @@ pub enum Commands {
 }
 
 impl Cli {
-    pub fn available_timezones(&self) -> [Tz; 596] {
+    pub fn available_timezones() -> [Tz; 596] {
         TZ_VARIANTS
     }
 
-    pub fn timezones(
-        &self,
+    pub fn compare_timezones(
         timezones: &Vec<String>,
         local: bool) -> Vec<(String, DateTime<Tz>)> {
+
         let current_zone = iana_time_zone::get_timezone().unwrap();
         let current_tz = Cli::get_tz(&current_zone);
-        let now = Local::now();
+        let now = Utc::now();
         let mut zones: Vec<(String, DateTime<Tz>)> =
             timezones
             .clone()
