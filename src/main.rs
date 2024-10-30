@@ -9,7 +9,7 @@ fn main() {
     println!("\n");
 
     match &cli.command {
-        Some(Commands::List) => {
+        Commands::List => {
             let available_timezones = Cli::available_timezones();
 
             println!("AVAILABLE TIMEZONES");
@@ -18,7 +18,7 @@ fn main() {
                 println!("{}", timezone);
             }
         },
-        Some(Commands::Compare { timezones, local }) => {
+        Commands::Compare { timezones, local } => {
             println!("{0: <25} | {1: <20}", "Timezone", "Time");
             println!("{0: <25} | {1: <20}", "_________________________", "___________________________");
 
@@ -26,6 +26,5 @@ fn main() {
                 println!("{0: <25} | {1: <20}", zone.0, zone.1.format("%Y-%m-%d %H:%M %Z %:z"));
             }
         },
-        None => {},
     }
 }
