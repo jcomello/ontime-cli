@@ -1,5 +1,6 @@
 mod cli;
 mod tests;
+mod compare_args;
 use clap::Parser;
 use crate::cli::{Cli, Commands};
 
@@ -18,11 +19,11 @@ fn main() {
                 println!("{}", timezone);
             }
         },
-        Commands::Compare { timezones, local, from_now } => {
+        Commands::Compare(args)  => {
             println!("{0: <25} | {1: <20}", "Timezone", "Time");
             println!("{0: <25} | {1: <20}", "_________________________", "___________________________");
 
-            for zone in Cli::compare_timezones(&timezones, *local, *from_now) {
+            for zone in Cli::compare_timezones(args) {
                 println!("{0: <25} | {1: <20}", zone.0, zone.1.format("%Y-%m-%d %H:%M %Z %:z"));
             }
         },
