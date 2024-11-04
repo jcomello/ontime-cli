@@ -1,10 +1,7 @@
 #[cfg(test)]
-mod tests {
-    use std::str::FromStr;
+mod list {
     use crate::Cli;
-    use crate::compare_args::CompareArgs;
-    use chrono::Utc;
-    use chrono_tz::{TZ_VARIANTS, Tz};
+    use chrono_tz::TZ_VARIANTS;
 
     #[test]
     fn test_available_timezones() {
@@ -12,6 +9,15 @@ mod tests {
 
         assert_eq!(available_timezones, TZ_VARIANTS);
     }
+}
+
+#[cfg(test)]
+mod compare {
+    use std::str::FromStr;
+    use crate::Cli;
+    use crate::compare_args::CompareArgs;
+    use chrono::Utc;
+    use chrono_tz::Tz;
 
     #[test]
     fn test_compare_timezones_without_local() {

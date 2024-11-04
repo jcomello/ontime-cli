@@ -1,9 +1,7 @@
 #[cfg(test)]
-mod tests {
+mod time {
     use crate::compare_args::CompareArgs;
-    use std::str::FromStr;
     use chrono::{Utc, Duration};
-    use chrono_tz::Tz;
 
     #[test]
     fn test_compare_args_time() {
@@ -16,7 +14,6 @@ mod tests {
             ago: 0,
         };
         let formated_args_time = args.time().format("%Y-%m-%d %H:%M %Z %:z").to_string();
-
 
         assert_eq!(formated_args_time, formated_now);
     }
@@ -33,7 +30,6 @@ mod tests {
         };
         let formated_args_time = args.time().format("%Y-%m-%d %H:%M %Z %:z").to_string();
 
-
         assert_eq!(formated_args_time, formated_now);
     }
 
@@ -48,7 +44,6 @@ mod tests {
             ago: 3,
         };
         let formated_args_time = args.time().format("%Y-%m-%d %H:%M %Z %:z").to_string();
-
 
         assert_eq!(formated_args_time, formated_now);
     }
@@ -65,9 +60,16 @@ mod tests {
         };
         let formated_args_time = args.time().format("%Y-%m-%d %H:%M %Z %:z").to_string();
 
-
         assert_eq!(formated_args_time, formated_now);
     }
+}
+
+#[cfg(test)]
+mod timezones {
+    use crate::compare_args::CompareArgs;
+    use std::str::FromStr;
+    use chrono::Utc;
+    use chrono_tz::Tz;
 
     #[test]
     fn test_compare_args_timezones() {
@@ -79,7 +81,7 @@ mod tests {
         let new_york_timezone = now.with_timezone(&new_york_tz).format("%Y-%m-%d %H:%M %Z %:z").to_string();
         let berlin_timezone = now.with_timezone(&berlin_tz).format("%Y-%m-%d %H:%M %Z %:z").to_string();
 
-       let expected_timezones = vec![
+        let expected_timezones = vec![
             ("America/New_York".to_string(), new_york_timezone),
             ("Europe/Berlin".to_string(), berlin_timezone),
         ];
@@ -109,7 +111,7 @@ mod tests {
         let new_york_timezone = now.with_timezone(&new_york_tz).format("%Y-%m-%d %H:%M %Z %:z").to_string();
         let berlin_timezone = now.with_timezone(&berlin_tz).format("%Y-%m-%d %H:%M %Z %:z").to_string();
 
-       let expected_timezones = vec![
+        let expected_timezones = vec![
             ("America/Sao_Paulo (Local)".to_string(), local_timezone),
             ("America/New_York".to_string(), new_york_timezone),
             ("Europe/Berlin".to_string(), berlin_timezone),
