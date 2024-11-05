@@ -1,13 +1,17 @@
 #[cfg(test)]
 mod list {
     use crate::Cli;
+    use crate::list_args::ListArgs;
     use chrono_tz::TZ_VARIANTS;
 
     #[test]
     fn test_available_timezones() {
-        let available_timezones = Cli::available_timezones();
+        let args = ListArgs {
+            filter: None,
+        };
+        let available_timezones = Cli::available_timezones(&args);
 
-        assert_eq!(available_timezones, TZ_VARIANTS);
+        assert_eq!(available_timezones, TZ_VARIANTS.to_vec());
     }
 }
 

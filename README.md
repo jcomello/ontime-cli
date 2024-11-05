@@ -49,3 +49,16 @@ If you want to know all available timezones, you can use the list command.
 ```
 $ ontime list
 ```
+You can filter the available timezones if your need:
+```
+$ ontime list --filter Brazil
+```
+
+```
+AVAILABLE TIMEZONES
+-------------------
+Brazil/Acre
+Brazil/DeNoronha
+Brazil/East
+Brazil/West
+```

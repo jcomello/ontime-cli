@@ -1,6 +1,7 @@
 mod cli;
 mod tests;
 mod compare_args;
+mod list_args;
 use clap::Parser;
 use crate::cli::{Cli, Commands};
 
@@ -8,8 +9,8 @@ fn main() {
     let cli = Cli::parse();
 
     match &cli.command {
-        Commands::List => {
-            let available_timezones = Cli::available_timezones();
+        Commands::List(args) => {
+            let available_timezones = Cli::available_timezones(args);
 
             println!("AVAILABLE TIMEZONES");
             println!("-------------------");
