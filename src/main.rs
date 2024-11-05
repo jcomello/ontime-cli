@@ -7,8 +7,6 @@ use crate::cli::{Cli, Commands};
 fn main() {
     let cli = Cli::parse();
 
-    println!("\n");
-
     match &cli.command {
         Commands::List => {
             let available_timezones = Cli::available_timezones();
