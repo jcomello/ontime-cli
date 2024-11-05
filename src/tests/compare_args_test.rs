@@ -102,9 +102,11 @@ mod timezones {
     #[test]
     fn test_compare_args_timezones_with_local() {
         let now = Utc::now();
+        let local_str = iana_time_zone::get_timezone().unwrap();
+        let formated_local = format!("{} (Local)", local_str);
         let new_york_str = "America/New_York";
         let berlin_str = "Europe/Berlin";
-        let local_tz = Tz::from_str("America/Sao_Paulo").unwrap();
+        let local_tz = Tz::from_str(&local_str).unwrap();
         let new_york_tz = Tz::from_str(new_york_str).unwrap();
         let berlin_tz = Tz::from_str(berlin_str).unwrap();
         let local_timezone = now.with_timezone(&local_tz).format("%Y-%m-%d %H:%M %Z %:z").to_string();
@@ -112,7 +114,7 @@ mod timezones {
         let berlin_timezone = now.with_timezone(&berlin_tz).format("%Y-%m-%d %H:%M %Z %:z").to_string();
 
         let expected_timezones = vec![
-            ("America/Sao_Paulo (Local)".to_string(), local_timezone),
+            (formated_local, local_timezone),
             ("America/New_York".to_string(), new_york_timezone),
             ("Europe/Berlin".to_string(), berlin_timezone),
         ];
