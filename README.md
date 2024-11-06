@@ -3,6 +3,17 @@
 This is a CLI to show the time of given Timezones.
 Compare different places timezones.
 
+## Installation
+
+First install `rustup` using your system package manager, and then run:
+
+```sh
+rustup toolchain install nightly-2024-09-01
+cargo install ontime
+```
+
+**Note** that, in order to use `cargo` and `ontime` on Posix systems, you need
+to put `$CARGO_HOME/bin` (usually `$HOME/.cargo/bin`) into `PATH`.
 
 ## Usage
 
@@ -62,3 +73,19 @@ Brazil/DeNoronha
 Brazil/East
 Brazil/West
 ```
+
+## Known bugs
+
+Check [open issues][] for known bugs and feature requests.
+
+## License
+
+This software is licensed under the [GPL-3.0 License][].
+
+- Copyright 2024 João Mello &lt;joao.mello@a-nobody.dev&gt;
+- [COPYING][]
+
+[GPL-3.0 License]: https://opensource.org/license/gpl-3-0
+[COPYING]: https://github.com/jcomello/ontime-cli?tab=GPL-3.0-1-ov-file
+[open issues]: https://github.com/jcomello/ontime-cli/issues
+[Please Installer]: https://crates.io/crates/ontime
