@@ -1,5 +1,5 @@
 [package]
-name = "ontime"
+name = "ontime-cli"
 version = "0.1.0"
 edition = "2021"
 authors = ["João Mello <joao.mello@a-nobody.dev>"]
