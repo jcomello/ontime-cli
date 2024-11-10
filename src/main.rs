@@ -9,7 +9,7 @@ fn main() {
     let cli = Cli::parse();
 
     match &cli.command {
-        Commands::List(args) => {
+        Some(Commands::List(args)) => {
             let available_timezones = Cli::available_timezones(args);
 
             println!("AVAILABLE TIMEZONES");
@@ -18,7 +18,7 @@ fn main() {
                 println!("{}", timezone);
             }
         },
-        Commands::Compare(args)  => {
+        Some(Commands::Compare(args))  => {
             println!("{0: <25} | {1: <20}", "Timezone", "Time");
             println!("{0: <25} | {1: <20}", "_________________________", "___________________________");
 
@@ -26,5 +26,8 @@ fn main() {
                 println!("{0: <25} | {1: <20}", zone.0, zone.1.format("%Y-%m-%d %H:%M %Z %:z"));
             }
         },
+        None => {
+            // TODO: Tui implementation
+        }
     }
 }
