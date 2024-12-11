@@ -28,7 +28,7 @@ pub struct CompareArgs {
 
 impl CompareArgs {
     pub fn time(&self) -> DateTime<Utc> {
-        Utc::now() + Duration::hours(self.from_now.into()) - Duration::hours(self.ago.into())
+        Utc::now() + Duration::hours(self.from_now) - Duration::hours(self.ago)
     }
 
     pub fn timezones_list(&self) -> Vec<(String, DateTime<Tz>)> {
