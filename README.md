@@ -48,12 +48,12 @@ Also, it is possible add and subtract hours for your local time.
 The follow example, we're comparing Date Time 3 hours from current time.
 
 ```
-$ ontime-cli compare --timezone america/new_york --timezone europe/london --timezone europe/berlin --from-now 3
+$ ontime-cli compare --timezone America/New_York --timezone  Europe/London --timezone Europe/Berlin --from-now 3
 ```
 The next example, 3 hours ago.
 
 ```
-$ ontime-cli compare --timezone america/new_york --timezone europe/london --timezone europe/berlin --ago 3
+$ ontime-cli compare --timezone America/New_York --timezone Europe/London --timezone Europe/Berlin --ago 3
 ```
 
 If you want to know all available timezones, you can use the list command.
