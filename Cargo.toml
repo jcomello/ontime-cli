@@ -1,6 +1,6 @@
 [package]
 name = "ontime-cli"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 authors = ["João Mello <joao.mello@a-nobody.dev>"]
 license = "GPL-3.0"
