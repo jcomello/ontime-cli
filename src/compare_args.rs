@@ -60,7 +60,7 @@ impl CompareArgs {
         timezones_list
     }
 
-    fn get_tz(timezone: &String) -> Tz {
-        Tz::from_str(&timezone).unwrap()
+    fn get_tz(timezone: &str) -> Tz {
+        Tz::from_str(timezone).unwrap()
     }
 }
