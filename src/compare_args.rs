@@ -2,6 +2,7 @@ use clap::Args;
 use chrono::{Utc, DateTime, Duration};
 use chrono_tz::Tz;
 use std::str::FromStr;
+pub mod errors;
 
 #[derive(Debug, Args)]
 pub struct CompareArgs {
@@ -61,6 +62,6 @@ impl CompareArgs {
     }
 
     fn get_tz(timezone: &str) -> Tz {
-        Tz::from_str(timezone).unwrap()
+        Tz::from_str(timezone).expect(errors::UNEXISTENT_TZ)
     }
 }

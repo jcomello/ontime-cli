@@ -24,6 +24,19 @@ mod compare {
     use chrono_tz::Tz;
 
     #[test]
+    #[should_panic(expected = "This timezone is not in the list")]
+    fn test_compare_timezones_with_error() {
+        let new_york_typo_str = "merica/New_York";
+        let args = CompareArgs {
+            timezones: vec![new_york_typo_str.to_string()],
+            local: false,
+            from_now: 0,
+            ago: 0,
+        };
+        Cli::compare_timezones(&args);
+    }
+
+    #[test]
     fn test_compare_timezones_without_local() {
         let now = Utc::now();
         let new_york_str = "America/New_York";
