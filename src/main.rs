@@ -4,7 +4,7 @@ mod list_args;
 mod tests;
 use crate::cli::{Cli, Commands};
 use clap::Parser;
-use std::io;
+use std::io::{self, IsTerminal};
 
 fn main() {
     let cli = Cli::parse();
@@ -20,8 +20,12 @@ fn main() {
             }
         }
         Commands::Compare(args) => {
-            let lines: Vec<String> = io::stdin().lines().collect::<Result<_, _>>().unwrap();
-            let compare_timezones = Cli::compare_timezones(&args.stdin_or_args(lines));
+            let compare_timezones = if io::stdin().is_terminal() {
+                Cli::compare_timezones(args)
+            } else {
+                let lines: Vec<String> = io::stdin().lines().collect::<Result<_, _>>().unwrap();
+                Cli::compare_timezones(&args.stdin_or_args(lines))
+            };
 
             println!("{0: <25} | {1: <20}", "Timezone", "Time");
             println!(

@@ -62,11 +62,8 @@ impl CompareArgs {
     }
 
     pub fn stdin_or_args(&self, timezone_lines: Vec<String>) -> CompareArgs {
-        let mut comparing_timezones: Vec<String> = self.timezones.clone();
 
-        if !timezone_lines.is_empty() {
-            comparing_timezones = [timezone_lines, comparing_timezones].concat();
-        }
+        let comparing_timezones = [timezone_lines, self.timezones.clone()].concat();
 
         CompareArgs {
             from_now: self.from_now,
