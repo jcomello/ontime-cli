@@ -1,28 +1,28 @@
-use clap::Args;
-use chrono::{Utc, DateTime, Duration};
+use chrono::{DateTime, Duration, Utc};
 use chrono_tz::Tz;
+use clap::Args;
 use std::str::FromStr;
 pub mod errors;
 
 #[derive(Debug, Args)]
 pub struct CompareArgs {
     /// Timezones to be compared
-    #[clap(name="timezone")]
-    #[arg(short, long, required=true)]
+    #[clap(name = "timezone")]
+    #[arg(short, long, required = false)]
     pub timezones: Vec<String>,
 
     /// Compare timezones with local time
-    #[clap(name="local")]
+    #[clap(name = "local")]
     #[arg(short, long, default_value_t = false)]
     pub local: bool,
 
     /// Compare timezones in x hours in the future
-    #[clap(name="from-now")]
+    #[clap(name = "from-now")]
     #[arg(short, long, default_value_t = 0)]
     pub from_now: i64,
 
     /// Compare timezones in x hours in the past
-    #[clap(name="ago")]
+    #[clap(name = "ago")]
     #[arg(short, long, default_value_t = 0)]
     pub ago: i64,
 }
@@ -45,8 +45,8 @@ impl CompareArgs {
             timezones_list.push(element)
         }
 
-        let mut zones_list: Vec<(String, DateTime<Tz>)> =
-            self.timezones
+        let mut zones_list: Vec<(String, DateTime<Tz>)> = self
+            .timezones
             .clone()
             .into_iter()
             .map(|zone| {
@@ -59,6 +59,21 @@ impl CompareArgs {
         timezones_list.append(&mut zones_list);
 
         timezones_list
+    }
+
+    pub fn stdin_or_args(&self, timezone_lines: Vec<String>) -> CompareArgs {
+        let mut comparing_timezones: Vec<String> = self.timezones.clone();
+
+        if !timezone_lines.is_empty() {
+            comparing_timezones = [timezone_lines, comparing_timezones].concat();
+        }
+
+        CompareArgs {
+            from_now: self.from_now,
+            ago: self.ago,
+            local: self.local,
+            timezones: comparing_timezones,
+        }
     }
 
     fn get_tz(timezone: &str) -> Tz {

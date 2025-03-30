@@ -131,4 +131,56 @@ mod timezones {
 
         assert_eq!(formated_timezones_response, expected_timezones);
     }
+
+    #[test]
+    fn test_stdin_or_args() {
+        let new_york_str = "America/New_York";
+        let stdin_lines: Vec<String> = vec![new_york_str.to_string()];
+        let berlin_str = "Europe/Berlin";
+
+        let args = CompareArgs {
+            timezones: vec![berlin_str.to_string()],
+            local: true,
+            from_now: 0,
+            ago: 0,
+        };
+        let expected_timezones = vec![new_york_str.to_string(), berlin_str.to_string()];
+        let response = args.stdin_or_args(stdin_lines);
+
+        assert_eq!(response.timezones, expected_timezones);
+    }
+
+    #[test]
+    fn test_stdin_or_args_when_no_timezone_args() {
+        let new_york_str = "America/New_York";
+        let stdin_lines: Vec<String> = vec![new_york_str.to_string()];
+
+        let args = CompareArgs {
+            timezones: vec![],
+            local: true,
+            from_now: 0,
+            ago: 0,
+        };
+        let expected_timezones = vec![new_york_str.to_string()];
+        let response = args.stdin_or_args(stdin_lines);
+
+        assert_eq!(response.timezones, expected_timezones);
+    }
+
+    #[test]
+    fn test_stdin_or_args_when_no_stdin() {
+        let stdin_lines: Vec<String> = vec![];
+        let berlin_str = "Europe/Berlin";
+
+        let args = CompareArgs {
+            timezones: vec![berlin_str.to_string()],
+            local: true,
+            from_now: 0,
+            ago: 0,
+        };
+        let expected_timezones = vec![berlin_str.to_string()];
+        let response = args.stdin_or_args(stdin_lines);
+
+        assert_eq!(response.timezones, expected_timezones);
+    }
 }
