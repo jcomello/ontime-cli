@@ -17,6 +17,7 @@ to put `$CARGO_HOME/bin` (usually `$HOME/.cargo/bin`) into `PATH`.
 
 ## Usage
 
+### Compare subcommand
 Just say the timezones you want to compare and you're ready to go.
 ```
 $ ontime-cli compare --timezone America/New_York --timezone Europe/London --timezone Europe/Berlin
@@ -55,7 +56,18 @@ The next example, 3 hours ago.
 ```
 $ ontime-cli compare --timezone America/New_York --timezone Europe/London --timezone Europe/Berlin --ago 3
 ```
+Compare subcommand also accepts STDIN values. You can pipe values for comparing like this:
+```
+$ echo "Europe/Berlin" ontime-cli compare
+```
+The response will be:
+```
+Timezone                  | Time
+_________________________ | ___________________________
+Europe/Berlin             | 2025-03-30 17:37 CEST +02:00
+```
 
+### List subcommand
 If you want to know all available timezones, you can use the list command.
 ```
 $ ontime-cli list
