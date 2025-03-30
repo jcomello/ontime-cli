@@ -8,7 +8,7 @@ pub mod errors;
 pub struct CompareArgs {
     /// Timezones to be compared
     #[clap(name = "timezone")]
-    #[arg(short, long, required = false)]
+    #[arg(short, long)]
     pub timezones: Vec<String>,
 
     /// Compare timezones with local time
@@ -62,7 +62,6 @@ impl CompareArgs {
     }
 
     pub fn stdin_or_args(&self, timezone_lines: Vec<String>) -> CompareArgs {
-
         let comparing_timezones = [timezone_lines, self.timezones.clone()].concat();
 
         CompareArgs {
