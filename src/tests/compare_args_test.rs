@@ -12,6 +12,7 @@ mod time {
             local: false,
             from_now: 0,
             ago: 0,
+            datetime: Utc::now(),
         };
         let formated_args_time = args.time().format("%Y-%m-%d %H:%M %Z %:z").to_string();
 
@@ -27,6 +28,7 @@ mod time {
             local: false,
             from_now: 3,
             ago: 0,
+            datetime: Utc::now(),
         };
         let formated_args_time = args.time().format("%Y-%m-%d %H:%M %Z %:z").to_string();
 
@@ -42,6 +44,7 @@ mod time {
             local: false,
             from_now: 1,
             ago: 3,
+            datetime: Utc::now(),
         };
         let formated_args_time = args.time().format("%Y-%m-%d %H:%M %Z %:z").to_string();
 
@@ -57,6 +60,7 @@ mod time {
             local: false,
             from_now: 0,
             ago: 3,
+            datetime: Utc::now(),
         };
         let formated_args_time = args.time().format("%Y-%m-%d %H:%M %Z %:z").to_string();
 
@@ -90,6 +94,7 @@ mod timezones {
             local: false,
             from_now: 0,
             ago: 0,
+            datetime: Utc::now(),
         };
         let timezones_response = args.timezones_list();
         let formated_timezones_response: Vec<(String, String)> =  timezones_response.into_iter().map(|el| {
@@ -123,6 +128,7 @@ mod timezones {
             local: true,
             from_now: 0,
             ago: 0,
+            datetime: Utc::now(),
         };
         let timezones_response = args.timezones_list();
         let formated_timezones_response: Vec<(String, String)> =  timezones_response.into_iter().map(|el| {
@@ -143,6 +149,7 @@ mod timezones {
             local: true,
             from_now: 0,
             ago: 0,
+            datetime: Utc::now(),
         };
         let expected_timezones = vec![new_york_str.to_string(), berlin_str.to_string()];
         let response = args.stdin_or_args(stdin_lines);
@@ -160,6 +167,7 @@ mod timezones {
             local: true,
             from_now: 0,
             ago: 0,
+            datetime: Utc::now(),
         };
         let expected_timezones = vec![new_york_str.to_string()];
         let response = args.stdin_or_args(stdin_lines);
@@ -177,6 +185,7 @@ mod timezones {
             local: true,
             from_now: 0,
             ago: 0,
+            datetime: Utc::now(),
         };
         let expected_timezones = vec![berlin_str.to_string()];
         let response = args.stdin_or_args(stdin_lines);

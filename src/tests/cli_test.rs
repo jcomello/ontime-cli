@@ -32,6 +32,7 @@ mod compare {
             local: false,
             from_now: 0,
             ago: 0,
+            datetime: Utc::now(),
         };
         Cli::compare_timezones(&args);
     }
@@ -46,6 +47,7 @@ mod compare {
             local: false,
             from_now: 0,
             ago: 0,
+            datetime: Utc::now(),
         };
         let compare_timezones = Cli::compare_timezones(&args);
         let new_york_tz = Tz::from_str(new_york_str).unwrap();
@@ -76,6 +78,7 @@ mod compare {
             local: true,
             from_now: 0,
             ago: 0,
+            datetime: Utc::now(),
         };
         let compare_timezones = Cli::compare_timezones(&args);
         let formated_local = format!("{} (Local)", local_str);
