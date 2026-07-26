@@ -3,7 +3,6 @@ use chrono_tz::Tz;
 use clap::Args;
 use std::str::FromStr;
 pub mod errors;
-use dateparser::DateTimeUtc;
 use anyhow::Error;
 
 #[derive(Debug, Args)]
@@ -36,11 +35,7 @@ pub struct CompareArgs {
 }
 
 fn parse_datetime(arg: &str) -> Result<DateTime<Utc>, Error> {
-    let parsed_datetime: DateTime<Utc> = match arg.parse::<DateTimeUtc>() {
-        Ok(datetime) => datetime.0,
-        Err(e) => return Err(e),
-    };
-
+    let parsed_datetime: DateTime<Utc> = arg.parse()?;
     Ok(parsed_datetime)
 }
 
